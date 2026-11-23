@@ -1,0 +1,19 @@
+name: Build IPA
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Phiên bản Xcode
+        run: xcodebuild -version
+      - name: Build IPA
+        run: bash build_ipa.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WazuhMonitor-ipa
+          path: WazuhMonitor.ipa
